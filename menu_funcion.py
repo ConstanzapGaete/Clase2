@@ -2,7 +2,7 @@
 import os
 
 def menu_general():
-    os.system("cls")
+    os.system ("cls")
     print("******* MENU ******* ")
     print("1. Platos")
     print("2. Bebidas")
