@@ -85,3 +85,26 @@ def menu_salir():
    
     input("presiona cualquier tecla para volver al menu principal > ")
     
+piezas_grabadas=[ ]
+nombre_grabado=[ ]
+precio_grabado=[ ]
+
+menu=True
+while menu:
+    opcion_general=menu_general()
+    if opcion_general==1:
+        mgrabar=True
+        menu_grabar()
+        mgrabar=False
+    if opcion_general==2:
+        mbuscar=True
+        menu_buscar()
+        input("presiona cualquier tecla para volver al menu principal > ")
+        mbuscar=False
+    if opcion_general==3:
+        menuim=True
+        menu_imprimir()
+        input("presiona cualquier tecla para volver al menu principal > ")
+        menuim =False
+    if opcion_general==4:
+        menu_salir()
