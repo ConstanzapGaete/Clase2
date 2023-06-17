@@ -1,0 +1,157 @@
+def menu_general():
+    os.system("cls")
+    print("*****AUTO SEGURO*****")
+    print("1- Grabar")
+    print("2- Buscar")
+    print("3- Imprimir")
+    print("4- Salir")
+    opcion=validar_opcion(5)
+    return opcion
+
+
+def validar_opcion(fin):
+    try:
+        opcion=int(input("Ingrese una de las opciones indicadas"))
+        if opcion>0 and opcion<fin:
+            return opcion
+        else:
+            input("opcion no valida presiona cualquier tecla para continuar")
+    except:
+        input("opcion no valida presiona cualquier tecla para continuar")
+
+def guardar_vehiculo():
+    os.system("cls")
+    print("Favor ingrese los datos acontinuacion")
+    tipo= input("tipo vehiculo > ")
+    patente=validar_patente()
+    marca=validar_marca()
+    precio=validar_precio()
+    multas=registrar_multas()
+    fecha_registro=input("Fecha de registro   > ")
+    nombre_dueno=input("Nombre dueño   >")
+    vehiculos_registrados.append([tipo,patente,marca,precio,multas,fecha_registro,nombre_dueno])
+    input(f"Vehiculo Registrado con patente {patente} presiona enter para continuar >  ")
+    listado_patentes.append(patente)
+
+
+def registrar_multas():
+    os.system("cls")
+    validar=True
+    multas=[]
+    while validar:
+        try:
+            opcion=int(input("Tiene multas ? 1> SI     2>NO"))
+            if opcion==1:
+                cantidad=int(input("Cuantas multas tienes?"))
+                for i in range (cantidad):
+                    monto_multa=int(input(f"Monto multa : {i+1} > "))
+                    fecha_multa=input(f"Fecha de la multa : {i+1} > ")
+                    multas.append([monto_multa, fecha_multa])
+                validar=False
+            elif opcion==2:
+                 validar=False
+        except:
+            input("Error en valor ingresado")
+    return multas
+
+
+def validar_patente():
+    os.system("cls")
+    validar=True
+    while validar:
+        patente=input("Patente > ")
+        if len(patente)==6:
+         validar=False
+        else:
+            input("Patente no valida ingresa nuevamente ")
+    return patente
+
+
+def validar_marca():
+    os.system("cls")
+    validar=True
+    while validar:
+        marca=input("Marca  > ")
+        if len(marca)>1 and len(marca)<16:
+            validar=False
+        else:
+            input("La marca no corresponde ")
+    return marca
+
+def validar_precio():
+    os.system("cls")
+    validar=True
+    while validar:
+        try:
+            precio=int(input("precio > "))
+            if precio >5000000:
+                    validar=False
+            else:
+                    input("El precio no corresponde ")
+        except:
+            input("Valor no valido")
+    return precio
+def mostrar_patentes():
+    os.system("cls")
+    print("***********PATENTES REGISTRADAS***********")
+    print(listado_patentes)
+    patente= ""
+    validar=True
+    while validar:
+        patente=input("Ingrese la patente que desea consultar >>>")
+        if patente in listado_patentes:
+            validar=False
+        else:
+            input("La patente no se encuentra registrada ")
+    return patente
+
+def mostrar_vehiculo(patente):
+    os.system("cls")
+    for vehiculo in vehiculos_registrados:
+        if vehiculo[1]==patente:
+            print(f"TIPO: {vehiculo[0]}")
+            print(f"PATENTE: {vehiculo[1]}")
+            print(f"MARCA: {vehiculo[2]}")
+            print(f"PRECIO: {vehiculo[3]}")
+            print(f"MULTAS: {vehiculo[4]}")
+            print(f"FECHA REGISTRO : {vehiculo[5]}")
+            print(f"NOMBRE DUEÑO : {vehiculo[6]}")
+
+def salir():
+    os.system("cls")
+    print("***********SALIO DEL SISTEMA***********")
+    print("")
+
+
+
+def imprimir_certificado():
+    print("*********CERTIFICADO*********")
+    validar=True
+    while validar:
+            vehiculo=input("ingresa la patente del vehiculo >>>  ")
+            for vehiculo in vehiculos_registrados:
+                print("***************CERTIFICADO***************")
+                print(f"PATENTE: {vehiculo[1]}")
+                print(f"MULTAS: {vehiculo[4]}")
+                print(f"FECHA REGISTRO : {vehiculo[5]}")
+                print(f"NOMBRE DUEÑO : {vehiculo[6]}")
+            validar=False
+            
+
+vehiculos_registrados=[]
+listado_patentes=[]
+
+
+menu_g= True
+while menu_g:
+    opcion_g= menu_general()
+    if opcion_g==1:
+        guardar_vehiculo()
+    elif opcion_g==2:
+        patente= mostrar_patentes()
+        mostrar_vehiculo(patente)
+    elif opcion_g==3:
+        imprimir_certificado()
+    elif opcion_g==4:
+        salir()
+        menug=False
